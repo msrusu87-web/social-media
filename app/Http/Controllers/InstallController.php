@@ -36,7 +36,7 @@ class InstallController extends Controller
             'xml' => extension_loaded('xml'),
         ];
 
-        $allMet = !in_array(false, $requirements);
+        $allMet = ! in_array(false, $requirements);
 
         return view('installer.requirements', compact('requirements', 'allMet'));
     }
@@ -74,13 +74,13 @@ class InstallController extends Controller
         $envContent = File::get(base_path('.env.example'));
 
         // Replace database configuration
-        $envContent = str_replace('DB_HOST=127.0.0.1', 'DB_HOST=' . $request->db_host, $envContent);
-        $envContent = str_replace('DB_DATABASE=laravel', 'DB_DATABASE=' . $request->db_name, $envContent);
-        $envContent = str_replace('DB_USERNAME=root', 'DB_USERNAME=' . $request->db_user, $envContent);
-        $envContent = str_replace('DB_PASSWORD=', 'DB_PASSWORD=' . $request->db_password, $envContent);
+        $envContent = str_replace('DB_HOST=127.0.0.1', 'DB_HOST='.$request->db_host, $envContent);
+        $envContent = str_replace('DB_DATABASE=laravel', 'DB_DATABASE='.$request->db_name, $envContent);
+        $envContent = str_replace('DB_USERNAME=root', 'DB_USERNAME='.$request->db_user, $envContent);
+        $envContent = str_replace('DB_PASSWORD=', 'DB_PASSWORD='.$request->db_password, $envContent);
 
         // Add website name
-        $envContent = str_replace('APP_NAME=Laravel', 'APP_NAME="' . $request->website_name . '"', $envContent);
+        $envContent = str_replace('APP_NAME=Laravel', 'APP_NAME="'.$request->website_name.'"', $envContent);
 
         // Write to .env file
         File::put(base_path('.env'), $envContent);
@@ -121,12 +121,12 @@ class InstallController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Installation completed successfully!'
+                'message' => 'Installation completed successfully!',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Installation failed: ' . $e->getMessage()
+                'message' => 'Installation failed: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -136,11 +136,10 @@ class InstallController extends Controller
      */
     public function complete()
     {
-        if (!$this->isInstalled()) {
+        if (! $this->isInstalled()) {
             return redirect()->route('install.requirements');
         }
 
         return view('installer.complete');
     }
 }
-

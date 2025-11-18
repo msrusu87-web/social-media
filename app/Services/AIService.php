@@ -7,8 +7,8 @@ class AIService
     /**
      * Format post text for a specific platform.
      *
-     * @param string $text The original text
-     * @param string $platform The target platform (e.g., 'twitter', 'facebook', 'instagram')
+     * @param  string  $text  The original text
+     * @param  string  $platform  The target platform (e.g., 'twitter', 'facebook', 'instagram')
      * @return string The formatted text
      */
     public function formatPost(string $text, string $platform): string
@@ -20,7 +20,7 @@ class AIService
     /**
      * Generate post suggestion based on a topic.
      *
-     * @param string $topic The topic for the post
+     * @param  string  $topic  The topic for the post
      * @return string The suggested post content
      */
     public function generatePostSuggestion(string $topic): string
